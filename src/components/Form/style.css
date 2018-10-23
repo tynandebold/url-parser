@@ -1,0 +1,35 @@
+form {
+  margin: 24px 0;
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchbox {
+  background-color: #fafafa;
+  border: 3px solid #444;
+  font-size: 24px;
+  height: 48px;
+  padding: 0 10px;
+  width: calc(100% - 90px);
+}
+
+.submit-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.submit-btn:hover {
+  cursor: pointer;
+}
+
+.submit-btn:focus,
+.searchbox:focus {
+  outline: none;
+}
