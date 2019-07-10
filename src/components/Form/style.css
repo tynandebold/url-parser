@@ -10,7 +10,8 @@ form {
 
 .searchbox {
   background-color: #fafafa;
-  border: 3px solid #444;
+  border: 3px solid #212121;
+  border-radius: 2px;
   font-size: 24px;
   height: 48px;
   padding: 0 10px;
