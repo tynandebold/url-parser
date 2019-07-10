@@ -56,7 +56,8 @@ export default function App() {
         >
           this
         </a>
-        ? Sometimes it's nice to see what's returned in your URL object.
+        ? Sometimes it's nice to see what's returned in your URL object. Use
+        this simple tool to do just that.
       </h3>
       <Form submitForm={handleSubmit} url={url} updateInput={handleChange} />
       {message}

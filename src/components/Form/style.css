@@ -30,7 +30,6 @@ form {
   cursor: pointer;
 }
 
-.submit-btn:focus,
 .searchbox:focus {
   outline: none;
 }
