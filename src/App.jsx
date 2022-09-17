@@ -1,48 +1,47 @@
+import React, { useEffect, useState } from 'react';
+import * as urlParse from 'url-parse/dist/url-parse';
+import Form from './components/Form';
+
 import './index.css';
-import React, { useState } from 'react';
-import Form from './components/Form/';
 
 export default function App() {
   const [message, setMessage] = useState('');
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState(null);
   const [url, setUrl] = useState('');
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setUrl(e.target.value);
-  }
+  };
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  useEffect(() => {
+    if (url.length === 0) {
+      setResult(null);
+      setMessage('');
 
-    if (url.length === 0) return;
-
-    const valid = /^(ftp|http|https):\/\/[^ "]+$/.test(url);
-    if (!valid) {
-      setMessage('Please enter a valid URL.');
       return;
     }
 
-    parseUrl();
-  }
+    const valid = /^(ftp|http|https):\/\/[^ "]+$/.test(url);
 
-  function parseUrl() {
-    const parse = require('url-parse');
-    const parsedUrl = parse(url, true);
+    if (!valid) {
+      setMessage('Please enter a valid URL.');
+      setResult(null);
+
+      return;
+    }
+
     setMessage('');
-    setResult(parsedUrl);
-  }
+    setResult(urlParse(url, true));
+  }, [url]);
 
-  let output;
-  if (result) {
-    output = <pre>{JSON.stringify(result, undefined, 2)}</pre>;
-  }
   return (
-    <React.Fragment>
+    <>
       <h1>URL Parser</h1>
       <h3>
         Working on parsing a URL? Using something like{' '}
         <a
           href="https://www.npmjs.com/package/url-parse"
+          tabIndex={-1}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -51,17 +50,18 @@ export default function App() {
         or{' '}
         <a
           href="https://nodejs.org/docs/latest/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost"
+          tabIndex={-1}
           target="_blank"
           rel="noopener noreferrer"
         >
           this
         </a>
-        ? Sometimes it's nice to see what's returned in your URL object. Use
-        this simple tool to do just that.
+        ? Sometimes it&apos;s nice to see what&apos;s returned in your URL
+        object. Use this simple tool to do just that.
       </h3>
-      <Form submitForm={handleSubmit} url={url} updateInput={handleChange} />
+      <Form url={url} updateInput={handleChange} />
       {message}
-      {output}
-    </React.Fragment>
+      {result ? <pre>{JSON.stringify(result, undefined, 2)}</pre> : null}
+    </>
   );
 }

@@ -1,16 +1,18 @@
 import './style.css';
 import React from 'react';
 
-export default ({url, submitForm, updateInput}) => (
-  <form onSubmit={submitForm}>
-    <label>Enter a URL</label>
-    <div className="input-wrapper">
-      <input
-        className="searchbox"
-        onChange={updateInput}
-        type="text"
-        value={url} />
-      <input className="submit-btn" type="submit" value="Submit" />
-    </div>
-  </form>
-);
+export default ({ updateInput, url }) => {
+  return (
+    <form onSubmit={(e) => e.preventDefault()}>
+      <div className="input-wrapper">
+        <input
+          className="searchBox"
+          onChange={updateInput}
+          placeholder="Enter a URL"
+          type="text"
+          value={url}
+        />
+      </div>
+    </form>
+  );
+};
